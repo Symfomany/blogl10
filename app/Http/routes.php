@@ -30,3 +30,8 @@ Route::get('/concept', function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+
+Route::get('/medias', function () {
+    return view('medias');
+})->name('medias');

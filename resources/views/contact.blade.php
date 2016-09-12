@@ -59,8 +59,6 @@
 
                 </div>
 
-
-
                 <div class="form-group @if($errors->has('email')) has-warning @endif">
                   <label for="email">Email address</label>
                   <input value="{{ old('email') }}" type="email" name="email" class="form-control" id="email" placeholder="toto@gmail.com">
@@ -99,6 +97,18 @@
                   </span>
                 @endif
               </div>
+
+            <div style="display:none" id="rdv" class="form-group @if($errors->has('site')) has-warning @endif">
+              <label for="site">Date de rendez-vous</label>
+              <input type="date" value="{{ old('date') }}" name="date" class="form-control" id="site" placeholder="http://www.google.fr">
+
+              @if($errors->has('date'))
+                <span class="help-block">
+                  <i class="fa fa-exclamation-triangle"></i> {{ $errors->first('date') }}
+                </span>
+              @endif
+            </div>
+
 
                 <div class="form-group  @if($errors->has('message')) has-warning @endif">
                   <label for="message">Message</label>
@@ -152,6 +162,14 @@
 
         $('.alert-success').delay(10000).addClass('animated bounceOutUp');
 
+
+        $('select').change(function(){
+          if ($(this).val() == 'autre') {
+            $('#rdv').addClass('animated fadeInUp').show();
+          }else{
+            $('#rdv').removeClass('animated').addClass('animated fadeInUp');
+          }
+        });
 
         $('input,textarea').focus(function(){
 
