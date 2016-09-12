@@ -32,6 +32,4 @@ Route::get('/about', function () {
 })->name('about');
 
 
-Route::get('/medias', function () {
-    return view('medias');
-})->name('medias');
+Route::any('/media', 'MediaController@media')->name('media');

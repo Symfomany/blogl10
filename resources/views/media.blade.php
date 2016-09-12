@@ -25,6 +25,15 @@
 
     <div class="col-md-6">
       <div class="box box-primary">
+
+
+        @if(Session::has('success'))
+            <div class="alert alert-success">
+              <p>{{ Session::get('success') }}</p>
+            </div>
+        @endif
+
+
         <form role="form" method="post" action="">
           {{ csrf_field() }}
           <div class="box-body">
@@ -49,7 +58,7 @@
 
               <select class="select2 form-control" name="page">
                   @foreach(\App\Page::all() as $value)
-                      <option value="{{ $value->id}}">
+                      <option @if(old('page') == $value->id ) selected @endif value="{{ $value->id}}">
                         {{ $value->titre}}
                       </option>
                   @endforeach
@@ -63,19 +72,6 @@
                type="url" class="form-control" id="url"
               placeholder="Url de la video">
 
-            <div class="form-group @if($errors->has('titre')) has-warning  @endif">
-              <label for="titre">Titre</label>
-              <input name="titre" value="{{ old('titre') }}"
-               type="text" class="form-control" id="titre"
-              placeholder="Titre de votre photo">
-
-              @if($errors->has('titre'))
-                <span class="help-block">
-                  <i class="fa fa-exclamation-triangle"></i> {{ $errors->first('titre') }}
-                </span>
-              @endif
-
-            </div>
             @if($errors->has('url'))
                 <span class="help-block">
                   <i class="fa fa-exclamation-triangle"></i> {{ $errors->first('url') }}
@@ -117,9 +113,12 @@
 
             </div>
 
-
-
           </div>
+
+
+        <div class="box-footer">
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Créer ce media</button>
+        </div>
         </form>
       </div>
 </div>
