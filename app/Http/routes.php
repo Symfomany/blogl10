@@ -33,3 +33,5 @@ Route::get('/about', function () {
 
 
 Route::any('/media', 'MediaController@media')->name('media');
+
+Route::any('/user', 'UserController@add')->name('user');
