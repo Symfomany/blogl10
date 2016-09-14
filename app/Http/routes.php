@@ -34,4 +34,12 @@ Route::get('/about', function () {
 
 Route::any('/media', 'MediaController@media')->name('media');
 
-Route::any('/user', 'UserController@add')->name('user');
+
+// grpuer une liste de route
+// permet de les préfixer au niveau URI
+Route::group(['prefix' => 'user'], function () {
+
+  Route::any('/add', 'UserController@add')->name('add');
+  Route::any('/list', 'UserController@lister')->name('list');
+
+});

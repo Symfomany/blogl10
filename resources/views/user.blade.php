@@ -15,11 +15,24 @@
               <h3 class="box-title"><i class="fa fa-envelope"></i> Formulaire de contact</h3>
             </div>
 
-            <form role="form" method="post" action="">
+            <form enctype="multipart/form-data" role="form" method="post" action="">
 
               {{ csrf_field() }}
 
               <div class="box-body">
+
+
+            <div class="form-group @if($errors->has('image')) has-warning  @endif">
+              <label for="image">Image</label>
+              <input name="image" type="file" accept="image/*" capture
+               class="form-control" id="image">
+
+              @if($errors->has('image'))
+                <span class="help-block">
+                  <i class="fa fa-exclamation-triangle"></i> {{ $errors->first('image') }}
+                </span>
+              @endif
+            </div>
 
                 <div class="form-group @if($errors->has('nom')) has-warning  @endif">
                   <label for="nom">Nom</label>
@@ -61,7 +74,7 @@
 
                 <div class="form-group @if($errors->has('password')) has-warning @endif">
                   <label for="password">Mot de passe</label>
-                  <input value="{{ old('password') }}" type="password" name="email" class="form-control" id="password" placeholder="toto@gmail.com">
+                  <input value="{{ old('password') }}" type="password" name="password" class="form-control" id="password" placeholder="toto@gmail.com">
 
                   @if($errors->has('password'))
                     <span class="help-block">
@@ -70,14 +83,14 @@
                   @endif
                 </div>
 
-                <div class="form-group @if($errors->has('confirmation_password')) has-warning @endif">
-                  <label for="password">Confirmation de mot de passe</label>
-                  <input value="{{ old('confirmation_password') }}" type="password" name="confirmation_password" class="form-control" id="confirmation_password">
+                <div class="form-group @if($errors->has('password_confirmation')) has-warning @endif">
+                  <label for="password_confirmation">Confirmation de mot de passe</label>
+                  <input value="{{ old('password_confirmation') }}" type="password" name="password_confirmation" class="form-control" id="password_confirmation">
 
-                  @if($errors->has('confirmation_password'))
+                  @if($errors->has('password_confirmation'))
                     <span class="help-block">
                       <i class="fa fa-exclamation-triangle"></i>
-                      {{ $errors->first('confirmation_password') }}
+                      {{ $errors->first('password_confirmation') }}
                     </span>
                   @endif
                 </div>
