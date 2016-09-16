@@ -11,6 +11,7 @@ class Contact extends Model
   * Nom de ma table
   */
   protected $table = "contact";
+  use DbTrait;
 
 
 

@@ -3,9 +3,15 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use DB;
 class User extends Authenticatable
 {
+
+  public static function infoUser(array $table, $id) {
+    return DB::table('user')->select($table)
+                         ->where('id', $id)
+                         ->first();
+    }
 
     protected $table = "user";
 

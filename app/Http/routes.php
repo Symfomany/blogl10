@@ -41,5 +41,16 @@ Route::group(['prefix' => 'user'], function () {
 
   Route::any('/add', 'UserController@add')->name('add');
   Route::any('/list', 'UserController@lister')->name('list');
+});
+
+// grpuer une liste de route
+// permet de les préfixer au niveau URI
+Route::group(['prefix' => 'article'], function () {
+
+  Route::get('/delete/{id}', 'ArticleController@delete')->name('article.delete');
+  Route::get('/visibilite/{id}', 'ArticleController@visibilite')->name('article.visibilite');
+  Route::any('/list', 'ArticleController@lister')->name('article.list');
+  Route::get('/voir/{id}', 'ArticleController@voir')->name('article.voir');
+  Route::get('/pdf/{id}', 'ArticleController@pdf')->name('article.pdf');
 
 });

@@ -13,11 +13,8 @@ use Image;
 class UserController extends Controller
 {
 
-
   public function lister(){
-
     $users = User::all(); // récupérer tous les utilisateurs
-
     // transporteur: c'est un conteneur de données (tableaux)
     // elle envoies les données du controlleur à la vue
     return view('user/list', [
@@ -101,8 +98,7 @@ class UserController extends Controller
 
 
 
-    return view('user');
-
+    return view('user/add');
 
   }
 
