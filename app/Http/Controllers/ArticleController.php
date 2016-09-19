@@ -9,6 +9,7 @@ use App\Article;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\User;
+use Session;
 
 class ArticleController extends Controller
 {
@@ -22,6 +23,41 @@ class ArticleController extends Controller
 
     return redirect()->route('article.list') // redirige vers la page media
    ->with('success', 'L\'article a bien été supprimé.');
+ }
+
+ /**
+ *
+ */
+ public function clearCart($id = null){
+
+   if(!$id){
+     session()->pull('likes'); //nettoyage du panier
+   }else{
+     $likes = session('likes', []);
+     unset($likes[$id]); //supprimer un element d'un tableau à partir d'une clef
+     session()->put('likes', $likes);
+   }
+   return redirect()->route('article.list')
+            ->with('success',"article supprimé");
+}
+
+  /**
+  * Ajout Panier en session
+  */
+  public function panier(Article $id, $action) {
+    $likes = session('likes', []);
+
+    if ($action == 'like') {
+        $likes[$id->id] = $id->titre;
+        $message = "L'article {$id->titre} a bien été liké";
+    } else {
+        unset($likes[$id->id]);
+        $message = "L'article {$id->titre} a bien été disliké";
+    }
+
+    session()->put('likes', $likes);
+
+    return back()->with('success', $message);
  }
 
 

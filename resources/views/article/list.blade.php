@@ -59,6 +59,17 @@
               </a>
             </td>
             <td>
+              @if (array_key_exists($article->id, session('likes', [])))
+                <a href="{{ route('article.panier', ['id' => $article->id, 'action' => 'unlike']) }}">
+                  <i class="fa fa-heart"></i>
+                </a>
+              @else
+                <a href="{{ route('article.panier', ['id' => $article->id, 'action' => 'like']) }}">
+                  <i class="fa fa-heart-o"></i>
+                </a>
+              @endif
+            </td>
+            <td>
               <i>{{ $article->date_publication }}</i>
             </td>
 
