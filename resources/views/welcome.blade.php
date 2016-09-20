@@ -11,6 +11,7 @@
 <script src="{{ asset('plugins/chartjs/Chart.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript">
 $(function () {
 
@@ -53,19 +54,7 @@ $(function () {
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
   };
 
-  $.getJSON("/articles-stats",
-  function(data) { // data est la fonction de retour
 
-    //DONUT CHART
-   var donut = new Morris.Donut({
-     element: 'revenue-chart',
-     resize: true,
-     colors: ["#3c8dbc", "#f56954", "#00a65a"],
-     data: data,
-     hideHover: 'auto'
-   });
-
-  });
 
 
   $.getJSON("/comments-stats",
@@ -81,7 +70,7 @@ $(function () {
       xkey: 'year',
       // A list of names of data record attributes that contain y-values.
       ykeys: ['value'],
-      
+
       labels: ['Value']
 
     });
@@ -130,7 +119,7 @@ $(function () {
             </div>
             <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
+          <!-- /.info-box -->categories-stats
         </div>
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -163,7 +152,8 @@ $(function () {
               </div>
             </div>
             <div class="box-body chart-responsive">
-              <div class="chart" id="revenue-chart" style="height: 300px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+              <div class="chart"
+              data-url="{{ route('statsArticles') }}" id="revenue-chart" style="height: 300px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
               </div>
             </div>
             <!-- /.box-body -->
