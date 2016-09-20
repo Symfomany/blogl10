@@ -23,13 +23,20 @@ class WelcomeController extends Controller
     $nbMedias = Media::getNbMedias();
     $nbComment = Comment::getNbCommentActif(1);
 
-    dump($nbMedias);
-    exit();
+    // dump($nbMedias);
+    // exit();
 
     // $nbCat =  Categorie::has('articles')->count();
     // dump($nbCat);
     // exit;
 
+    // $nbMedias =  Media::has('articles')->count();
+    // dump($nbMedias);
+    // exit;
+
+    // $media = Media::find(6);
+    // dump($media->articles()->get());
+    // exit;
 
 
 

@@ -20,6 +20,14 @@ class Media extends Model
       ->groupBy('article_media.media_id')
       ->get()->count();
 
-
   }
+
+
+  /**
+    * The roles that belong to the user.
+    */
+   public function articles()
+   {
+       return $this->belongsToMany('App\Article');
+   }
 }

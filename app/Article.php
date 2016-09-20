@@ -34,7 +34,6 @@ public  static function getNbArticlesVisibles($visibilite){
 
   return Article::where('visibilite' ,  $visibilite)
          ->count();
-
 }
 
 
