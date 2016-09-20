@@ -12,6 +12,22 @@ class Article extends Model
 
   protected $table = "article";
 
+
+/**
+* SELECT COUNT( article.id ) AS nbArticles, categorie.titre
+* FROM article
+* INNER JOIN categorie ON categorie.id = article.categorie_id
+* GROUP BY categorie_id
+*/
+public static function getNbArticlesByCategories(){
+
+  return Article::select(DB::raw('COUNT(article.id) as nbArticles'), 'categorie.titre')
+                ->join('categorie', 'categorie.id', '=', 'article.categorie_id')
+                ->groupBy('categorie_id')
+                ->get();
+}
+
+
 /**
 *
 */

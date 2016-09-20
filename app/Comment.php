@@ -9,9 +9,12 @@ class Comment extends Model
 
   protected $table = "comment";
 
+  /**
+  *
+  */
   public static function getNbCommentActif($visibilite){
 
-      return Comment::where('etat' ,  $visibilite)
+      return Comment::where('etat', $visibilite)
              ->count();
   }
 

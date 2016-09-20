@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'WelcomeController@welcome')->name('homepage');
+Route::get('/categories-stats',
+'WelcomeController@statsCategories')
+->name('statsCategories');
 
 //  'NomduCobntroller@nomdelamethodeducontroller'
 

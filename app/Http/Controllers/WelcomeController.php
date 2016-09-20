@@ -14,6 +14,22 @@ class WelcomeController extends Controller
 {
 
   /**
+  * Retoruner du JSON (un tableaux d'objets en JS)
+  */
+  public function statsCategories(){
+
+    $nbCat = Article::getNbArticlesByCategories();
+    dump($nbCat->toJson());
+    exit();
+
+    // return [
+    //   ['name' => 'Chrome', 'value' => 15],
+    //   ['name' => 'Firefox', 'value' => 16],
+    // ];
+
+  }
+
+  /**
   * Homepage
   */
   public function welcome(){
@@ -34,9 +50,9 @@ class WelcomeController extends Controller
     // dump($nbMedias);
     // exit;
 
-    // $media = Media::find(6);
-    // dump($media->articles()->get());
-    // exit;
+    $media = Media::find(6);
+    dump($media->articles()->get());
+    exit;
 
 
 
