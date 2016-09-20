@@ -21,11 +21,12 @@ class Article extends Model
 */
 public static function getNbArticlesByCategories(){
 
-  return Article::select(DB::raw('COUNT(article.id) as nbArticles'), 'categorie.titre')
+  return Article::select(DB::raw('COUNT(article.id) as value'), 'categorie.titre as label')
                 ->join('categorie', 'categorie.id', '=', 'article.categorie_id')
                 ->groupBy('categorie_id')
                 ->get();
 }
+
 
 
 /**

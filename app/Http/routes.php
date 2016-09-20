@@ -16,6 +16,13 @@ Route::get('/categories-stats',
 'WelcomeController@statsCategories')
 ->name('statsCategories');
 
+Route::get('/articles-stats','WelcomeController@statsArticles')
+->name('statsArticles');
+
+Route::get('/comments-stats','WelcomeController@commentsArticles')
+->name('commentsArticles');
+
+
 //  'NomduCobntroller@nomdelamethodeducontroller'
 
 Route::any('/contact', 'ContactController@contact')->name('contact');

@@ -1,58 +1,33 @@
 @extends('layout')
 
 
+@section('css')
+  @parent
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+@endsection
+
 @section('js')
   @parent
 <script src="{{ asset('plugins/chartjs/Chart.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
 <script type="text/javascript">
 $(function () {
 
-  /* ChartJS
-   * -------
-   * Here we will create a few charts using ChartJS
-   */
-
-  // Get context with jQuery - using jQuery's .get() method.
   var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
   var pieChart = new Chart(pieChartCanvas);
-  var PieData = [
-    {
-      value: 700,
-      color: "#f56954",
-      highlight: "#f56954",
-      label: "Chrome"
-    },
-    {
-      value: 500,
-      color: "#00a65a",
-      highlight: "#00a65a",
-      label: "IE"
-    },
-    {
-      value: 400,
-      color: "#f39c12",
-      highlight: "#f39c12",
-      label: "FireFox"
-    },
-    {
-      value: 600,
-      color: "#00c0ef",
-      highlight: "#00c0ef",
-      label: "Safari"
-    },
-    {
-      value: 300,
-      color: "#3c8dbc",
-      highlight: "#3c8dbc",
-      label: "Opera"
-    },
-    {
-      value: 100,
-      color: "#d2d6de",
-      highlight: "#d2d6de",
-      label: "Navigator"
-    }
-  ];
+
+  var PieData;
+
+  // AJAX => Asynchronisation Javascript
+  $.getJSON("/categories-stats",
+  function(data) { // data est la fonction de retour
+    PieData = data; // valeur de retour
+    pieChart.Doughnut(data, pieOptions);
+    //chargement du plugin Do
+  });
+
+
   var pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
     segmentShowStroke: true,
@@ -77,9 +52,41 @@ $(function () {
     //String - A legend template
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
   };
-  //Create pie or douhnut chart
-  // You can switch between pie and douhnut using the method below.
-  pieChart.Doughnut(PieData, pieOptions);
+
+  $.getJSON("/articles-stats",
+  function(data) { // data est la fonction de retour
+
+    //DONUT CHART
+   var donut = new Morris.Donut({
+     element: 'revenue-chart',
+     resize: true,
+     colors: ["#3c8dbc", "#f56954", "#00a65a"],
+     data: data,
+     hideHover: 'auto'
+   });
+
+  });
+
+
+  $.getJSON("/comments-stats",
+
+  function(data) {
+      new Morris.Line({
+      // ID of the element in which to draw the chart.
+      element: 'myfirstchart',
+      // Chart data records -- each entry in this array corresponds to a point on
+      // the chart.
+      data: data,
+      // The name of the data record attribute that contains x-values.
+      xkey: 'year',
+      // A list of names of data record attributes that contain y-values.
+      ykeys: ['value'],
+      
+      labels: ['Value']
+
+    });
+
+  });
 
 });
 </script>
@@ -139,9 +146,54 @@ $(function () {
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
-      </div>
+  </div>
 
 <div class="row">
+
+  <div class="col-md-6">
+          <!-- AREA CHART -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Répartition des commentaires</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body chart-responsive">
+              <div class="chart" id="revenue-chart" style="height: 300px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+
+        </div>
+  <div class="col-md-6">
+          <!-- AREA CHART -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Variation des commentaires</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body chart-responsive">
+              <div id="myfirstchart" style="height: 250px;"></div>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+
+        </div>
 
   <div class="col-md-6">
 
@@ -232,7 +284,10 @@ $(function () {
 </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 184.91124260355px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
 <!-- /.chat -->
 <div class="box-footer">
-  <div class="input-group">
+  <div class="input-gr</div>
+<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="box-body chat" id="chat-box" style="overflow: hidden; width: auto; height: 250px;">
+  <!-- chat item -->
+  <div class="item">oup">
     <input class="form-control" placeholder="Type message...">
 
     <div class="input-group-btn">

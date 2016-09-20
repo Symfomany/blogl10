@@ -19,15 +19,37 @@ class WelcomeController extends Controller
   public function statsCategories(){
 
     $nbCat = Article::getNbArticlesByCategories();
-    dump($nbCat->toJson());
-    exit();
 
-    // return [
-    //   ['name' => 'Chrome', 'value' => 15],
-    //   ['name' => 'Firefox', 'value' => 16],
-    // ];
+    // parser les values
+    foreach($nbCat as $key => $categorie){
+      // caster une chaine en nombre
+      $nbCat[$key]['value'] = (int) $nbCat[$key]['value'];
+    }
+    // dump($nbCat);exit;
+    return $nbCat->toJson();
+  }
+
+  public function statsArticles(){
+    $nbComms = Comment::getNbCommsByArticles();
+    // exit(dump($nbComms));
+    return $nbComms->toJson();
 
   }
+
+  public function commentsArticles(){
+
+    $datas = [];
+
+    for ($i = date('Y')-5; $i < date('Y'); $i++) {
+      $datas[] = [
+            'year' =>  (string) $i,
+            'value' => Comment::getVariationNbComments($i)
+        ];
+    }
+
+    return $datas;
+  }
+
 
   /**
   * Homepage
@@ -50,9 +72,9 @@ class WelcomeController extends Controller
     // dump($nbMedias);
     // exit;
 
-    $media = Media::find(6);
-    dump($media->articles()->get());
-    exit;
+    // $media = Media::find(6);
+    // dump($media->articles()->get());
+    // exit;
 
 
 
