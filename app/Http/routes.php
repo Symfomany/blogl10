@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('homepage');
+Route::get('/', 'WelcomeController@welcome')->name('homepage');
 
 //  'NomduCobntroller@nomdelamethodeducontroller'
 

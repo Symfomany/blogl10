@@ -48,7 +48,7 @@
   </div>
 
 
-  @include('partials/_footer')
+  {{-- @include('partials/_footer') --}}
 
     <!-- /.content-wrapper -->
 

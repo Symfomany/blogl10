@@ -26,4 +26,18 @@ public static function articleAutCat($id){
 }
 
 
+
+/**
+* Recupérer les articles visibles
+*/
+public  static function getNbArticlesVisibles($visibilite){
+
+  return Article::where('visibilite' ,  $visibilite)
+         ->count();
+
+}
+
+
+
+
 }
