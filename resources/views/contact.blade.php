@@ -24,7 +24,7 @@
 
             <form role="form" method="post" action="">
 
-              {{ csrfmedia_field() }}
+              {{ csrf_field() }}
 
               <div class="box-body">
 

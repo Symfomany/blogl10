@@ -37,7 +37,7 @@ class ArticleController extends Controller
      unset($likes[$id]); //supprimer un element d'un tableau à partir d'une clef
      session()->put('likes', $likes);
    }
-   return redirect()->route('article.list')
+   return back()
             ->with('success',"article supprimé");
 }
 
