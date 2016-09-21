@@ -21,15 +21,34 @@ app.controller('TchatController', function TchatController(
 
   // je charge mes données en JSON avec le module $http
 
+$scope.skipe = 0;
+$scope.take = 5;
+
+/*
+* Différence entre 2 tableaux d'objets par leur IDs
+* Passer de 90° à 45° sur le CPU
+*/
+function areDifferentByIds(a, b) {
+    var idsA = a.map( function(x){ return x.id; } ).sort();
+    var idsB = b.map( function(x){ return x.id; } ).sort();
+    return (idsA.join(',') !== idsB.join(',') );
+}
+
 $interval(function(){
-  $http.get('/tchat')
+  $http.get('/tchat/' + $scope.skipe + "/" + $scope.take)
     .then(function(response) {
-        $scope.messages = response.data;  //
+        if(areDifferentByIds($scope.messages,response.data)){
+          $scope.messages = response.data;  //
+        }
         //response.data sont les données renvoyées du serveur
   });
 }, 500);
 
   // ajout d'un tchat
+  $scope.next = function(){
+    $scope.skipe += 5;
+  };
+
   $scope.add = function(){
 
       if($scope.content.length > 0){

@@ -249,6 +249,9 @@ $(function () {
       {{ csrf_field() }}
       <input ng-model="content" class="form-control" placeholder="Type message...">
     </form>
+    <button ng-click='next()' type="button" class="btn btn-xs btn-primary">
+      Voir les suivants
+    </button>
   </div>
 </div>
 </div>

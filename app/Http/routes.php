@@ -22,8 +22,10 @@ Route::get('/articles-stats','WelcomeController@statsArticles')
 Route::get('/comments-stats','WelcomeController@commentsArticles')
 ->name('commentsArticles');
 
-Route::get('/tchat', function(){
-  return App\Tchat::all();
+Route::get('/tchat/{skip?}/{take?}', function($skip = 0, $take = 6){
+  // take() => limit à 6
+  // orderBy: trié âr id descendante
+  return App\Tchat::skip($skip)->take($take)->orderBy('id', 'desc')->get();
 })
 ->name('tchat');
 
