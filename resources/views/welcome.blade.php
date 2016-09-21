@@ -12,6 +12,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment-with-locales.min.js" charset="utf-8"></script>
 
 <script src="{{ asset('js/app.js') }}"></script>
 
@@ -142,7 +143,7 @@ $(function () {
             <div class="info-box-content">
               <span class="info-box-text">Commentaires actifs</span>
               <span class="info-box-number">{{ $nbComment }}</span>
-            </div>
+            </div>Tchat
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
@@ -173,7 +174,7 @@ $(function () {
           </div>
           <!-- /.box -->
 
-
+Tchat
         </div>
   <div class="col-md-6">
           <!-- AREA CHART -->
@@ -233,7 +234,7 @@ $(function () {
         <div class="clear clearfix">
             <i class="fa fa-comment"></i>
             #{message.content}#
-          <span class="pull-right">#{message.created_at}#</span>
+          <span class="pull-right">#{message.created_at|ago}#</span>
         </div>
         <hr />
       </div>

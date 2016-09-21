@@ -6,8 +6,31 @@ app.config(function($interpolateProvider){
     $interpolateProvider.startSymbol('#{').endSymbol('}#');
 });
 
+//je crée un filtre
+app.filter('ago', function(){
+
+        return function(input){
+					moment.locale('fr'); // initialize moment en français
+					var dateTime = new Date(input);
+					dateTime = moment(dateTime).fromNow();
+          // fromNow() : transformer en format humains
+					return dateTime;
+        };
+});
+
 app.controller('TchatController', function TchatController(
-  $scope, $http, $interval) {
+  $scope, $http, $interval, $window) {
+
+
+
+
+  //   angular.element('.slimscroll').bind("scroll", function(e, pos) {
+  //     var raw = angular.element('.slimscroll');
+  //      console.log('scrolling');
+  //      console.log(pos);
+  //     //  console.log(raw.scrollTop + raw.offsetHeight);
+   //
+  //  });
 
     // $http: permet d'interroger une URL et de retourner
     // les données en JSON
@@ -21,8 +44,7 @@ app.controller('TchatController', function TchatController(
 
   // je charge mes données en JSON avec le module $http
 
-$scope.skipe = 0;
-$scope.take = 5;
+
 
 /*
 * Différence entre 2 tableaux d'objets par leur IDs
@@ -33,6 +55,19 @@ function areDifferentByIds(a, b) {
     var idsB = b.map( function(x){ return x.id; } ).sort();
     return (idsA.join(',') !== idsB.join(',') );
 }
+
+//initialisation
+$scope.skipe = 0;
+$scope.take = 5;
+
+// evebnement quand je scroll
+$('.slimscroll').scroll(function () {
+  console.log($('.slimscroll').scrollTop());
+  // il recupere la position depuis top de mon element $('.slimscroll')
+  if($('.slimscroll').scrollTop() > 80){
+    $scope.take += 5; // augmenter le take de 5
+  }
+});
 
 $interval(function(){
   $http.get('/tchat/' + $scope.skipe + "/" + $scope.take)
