@@ -28,14 +28,7 @@ Route::get('/tchat', function(){
 ->name('tchat');
 
 
-Route::post('/tchat-add', function(Illuminate\Http\Request $request){
-
-  $tchat = new  App\Tchat();
-  $tchat->content = $request->content;
-  $tchat->save();
-
-})
-->name('tchat-add');
+Route::post('/tchat-add','TchatController@add')->name('tchat-add');
 
 
 //  'NomduCobntroller@nomdelamethodeducontroller'

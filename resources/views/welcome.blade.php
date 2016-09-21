@@ -11,9 +11,18 @@
 <script src="{{ asset('plugins/chartjs/Chart.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
+<script src="{{ asset('vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+
 <script src="{{ asset('js/app.js') }}"></script>
+
 <script type="text/javascript">
 $(function () {
+
+  $('.slimscroll').slimScroll({
+    color: '#000',
+    size: '5px',
+    height: '350px',
+  });
 
   var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
   var pieChart = new Chart(pieChartCanvas);
@@ -123,7 +132,7 @@ $(function () {
             </div>
             <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->categories-stats
+          <!-- /.info-box -->
         </div>
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -217,17 +226,19 @@ $(function () {
   <h3 class="box-title">#{ titre }#</h3>
 
 </div>
-<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="box-body chat" id="chat-box" style="overflow: hidden; width: auto; height: 250px;">
 
-  <div class="item" ng-repeat="message in messages">
-    <p>
-      #{message.content}#
-    </p>
+<div class="box-body" >
+  <div class="slimscroll">
+      <div ng-repeat="message in messages" style="padding:15px">
+        <div class="clear clearfix">
+            <i class="fa fa-comment"></i>
+            #{message.content}#
+          <span class="pull-right">#{message.created_at}#</span>
+        </div>
+        <hr />
+      </div>
   </div>
 
-
-
-</div>
 </div>
 <!-- /.chat -->
 <div class="box-footer">
