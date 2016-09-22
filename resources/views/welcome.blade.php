@@ -53,7 +53,7 @@ $(function () {
   //   //String - The colour of each segment stroke
   //   segmentStrokeColor: "#fff",
   //   //Number - The width of each segment stroke
-  //   segmentStrokeWidth: 2,
+  //   segmentStrokeWidth: header2,
   //   //Number - The percentage of the chart that we cut out of the middle
   //   percentageInnerCutout: 50, // This is 0 for Pie charts
   //   //Number - Amount of animation steps
@@ -102,6 +102,7 @@ $(function () {
 <script src="{{ asset('js/TchatController.js') }}"></script>
 <script src="{{ asset('js/CommentController.js') }}"></script>
 <script src="{{ asset('js/ChartController.js') }}"></script>
+<script src="{{ asset('js/VideoController.js') }}"></script>
 @endsection
 
 @section('content')
@@ -357,6 +358,47 @@ $(function () {
     </button>
   </div>
 </div>
+</div>
+
+
+<div class="col-md-12" ng-controller="VideoController">
+  <div class="box row">
+  <div class="box-header">
+      <h3><i class="fa fa-video-camera"></i> Ma vidéo</h3>
+  </div>
+  <div class="box-body">
+    <div class="row">
+
+      <div class="col-md-6" ng-repeat="data in datas">
+        <p class="pull-right"><i ng-click="remove(data)" class="fa fa-times"></i></p>
+          <h4>#{data.titre}# <small>#{data.annee}#</small></h4>
+          <p>#{data.description}#</p>
+          <p><i>#{data.created_at|ago}#</i></p>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="560" height="315" src="#{formattage(data.url)}#" frameborder="0" allowfullscreen></iframe>
+          </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+  <div class="box row">
+  <div class="box-header">
+      <h3><i class="fa fa-video-camera"></i> Créer une vidéo</h3>
+  </div>
+  <div class="box-body">
+    <form >
+      <input class="form-control" type="text" ng-model="titre" required placeholder="Titre">
+      <textarea class="form-control"  ng-model="description" required placeholder="Description.."></textarea>
+      <input class="form-control" type="url" ng-model="url" required placeholder="Url: youtube, dailymotion">
+      <input class="form-control" type="text" ng-model="annee" required placeholder="Année de sortie">
+      <input class="form-control" type="text" ng-model="created_at" required placeholder="Date de sortie">
+      <button ng-click="add()" type="submit" class="btn btn-primary" name="button"><i class="fa fa-check"></i>Ajouter la vidéo</button>
+    </form>
+
+  </div>
+  </div>
+
 </div>
 </div>
 

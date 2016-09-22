@@ -47,7 +47,7 @@
         opacity: 0;
         left: 50px;
       }
-      
+
     </style>
   @show
 
@@ -284,6 +284,23 @@
       <script src="{{ asset('js/app.min.js') }}"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js" charset="utf-8"></script>
+
+
+      <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+      <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
+      <script>
+       // Initialize Firebase
+       // Comment il se connecte à la base "videos"
+       // de Firebase ()
+       var config = {
+         apiKey: "AIzaSyARyRTdBC1a8PAjdAm5YcmgSi3gkrXOvIk",
+         authDomain: "videos-7ddfb.firebaseapp.com",
+         databaseURL: "https://videos-7ddfb.firebaseio.com",
+         storageBucket: "videos-7ddfb.appspot.com",
+         messagingSenderId: "920426966939"
+       };
+       firebase.initializeApp(config);
+      </script>
 
     @show
 

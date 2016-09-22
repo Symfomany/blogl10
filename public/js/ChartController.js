@@ -2,6 +2,8 @@ app.controller('ChartController', function ChartController($scope, $http, $inter
     var chart1 = {};
     var chart2 = {};
 
+  
+
     chart1.type = "PieChart";
     chart2.type = "PieChart";
 

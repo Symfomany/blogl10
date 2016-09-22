@@ -1,4 +1,4 @@
-var app = angular.module('app', ['googlechart']); // une app initialisée
+var app = angular.module('app', ['firebase']); // une app initialisée
 
 
 // configure l'affichage de nos données de la scope
