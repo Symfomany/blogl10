@@ -53,7 +53,22 @@ public  static function getNbArticlesVisibles($visibilite){
          ->count();
 }
 
+  /**
+   * Get the category
+   */
+  public function categorie()
+  {
+      return $this->belongsTo('App\Categorie');
+  }
 
+
+  /**
+   * Get the comments for the blog post.
+   */
+  public function comments()
+  {
+      return $this->hasMany('App\Comment');
+  }
 
 
 }

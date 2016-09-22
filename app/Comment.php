@@ -20,7 +20,6 @@ class Comment extends Model
 
   public static function getVariationNbComments($annee){
 
-
       return Comment::select(DB::raw('COUNT(*) as value'))
                       ->whereYear('created_at','=', $annee)
                       ->first()
@@ -33,6 +32,12 @@ class Comment extends Model
                   ->join('article', 'comment.article_id', '=', 'article.id')
                   ->groupBy('article_id')
                   ->get();
+  }
+
+
+  public function user(){
+
+    return $this->belongsTo('App\User');
   }
 
 

@@ -22,6 +22,33 @@
     <link rel="stylesheet" href="{{ asset('css/general.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" media="screen" title="no title" charset="utf-8">
+
+    <style media="screen">
+        /*ng-show
+        ng-hide
+        ng-class
+        ng-view
+        ng-include
+        ng-repeat
+        ng-if
+        ng-switch -->
+        <!-- ng-animate
+      ng-hide-animate
+      ng-hide-add (if the element will be hidden)
+      ng-hide-remove (if the element will be showed)
+      ng-hide-add-active (if the element will be hidden)
+      ng-hide-remove-active (if the element will be showed) */
+      div.comment-text {
+        transition: all linear 0.8s;
+        position: relative;
+        left: 0px;
+      }
+      div.comment-text.ng-leave-active, div.comment-text.ng-hide {
+        opacity: 0;
+        left: 50px;
+      }
+      
+    </style>
   @show
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -253,8 +280,11 @@
     @section('js')
       <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" charset="utf-8"></script>
       <script src="{{ asset('js/app.min.js') }}"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js" charset="utf-8"></script>
+
     @show
 
 

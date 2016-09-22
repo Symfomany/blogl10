@@ -1,4 +1,4 @@
-var app = angular.module('app', []); // une app initialisée
+var app = angular.module('app', ['googlechart']); // une app initialisée
 
 
 // configure l'affichage de nos données de la scope
@@ -86,7 +86,7 @@ $interval(function(){
 
   $scope.add = function(){
 
-      if($scope.content.length > 0){
+      if($scope.content != undefined && $scope.content.length > 0){
         // $http post me permet de faire une REQUETE en POST
         $http.post('/tchat-add', // url (uri)
         {'content': $scope.content.trim() })

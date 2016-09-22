@@ -22,6 +22,13 @@ Route::get('/articles-stats','WelcomeController@statsArticles')
 Route::get('/comments-stats','WelcomeController@commentsArticles')
 ->name('commentsArticles');
 
+
+
+Route::get('/comments/{id}/{skip?}/{take?}',function($id, $skip = 0, $take = 5){
+  return App\Comment::where('article_id', $id)->skip($skip)->take($take)->orderBy('id', 'desc')->get();
+})
+->name('comments');
+
 Route::get('/tchat/{skip?}/{take?}',function($skip = 0, $take = 5){
   // take() => limit à 6
   // orderBy: trié âr id descendante
@@ -30,8 +37,9 @@ Route::get('/tchat/{skip?}/{take?}',function($skip = 0, $take = 5){
 ->name('tchat');
 
 
+Route::get('/comments-remove/{id}','CommentController@remove')->name('comment-remove');
+Route::post('/comment-add/{id}','CommentController@add')->name('comment-add');
 Route::post('/tchat-add','TchatController@add')->name('tchat-add');
-
 
 //  'NomduCobntroller@nomdelamethodeducontroller'
 

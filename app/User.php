@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
 class User extends Authenticatable
 {
+  protected $table = "user";
 
   public static function infoUser(array $table, $id) {
     return DB::table('user')->select($table)
@@ -13,7 +14,6 @@ class User extends Authenticatable
                          ->first();
     }
 
-    protected $table = "user";
 
     /**
      * The attributes that are mass assignable.

@@ -19,14 +19,13 @@ class WelcomeController extends Controller
   public function statsCategories(){
 
     $nbCat = Article::getNbArticlesByCategories();
-
-    // parser les values
-    foreach($nbCat as $key => $categorie){
-      // caster une chaine en nombre
-      $nbCat[$key]['value'] = (int) $nbCat[$key]['value'];
+    $tab = [['Label', 'Nombre']];
+    foreach($nbCat as $key => $art){
+      $tab[] = [$art->label, (int)$art->value ];
     }
-    // dump($nbCat);exit;
-    return $nbCat->toJson();
+
+    return $tab;
+
   }
 
   public function statsArticles(){
@@ -38,12 +37,12 @@ class WelcomeController extends Controller
 
   public function commentsArticles(){
 
-    $datas = [];
+    $datas = [['Annee', 'Nombre']];
 
-    for ($i = date('Y')-5; $i < date('Y'); $i++) {
+    for ($i = date('Y')-8; $i <= date('Y'); $i++) {
       $datas[] = [
-            'year' =>  (string) $i,
-            'value' => Comment::getVariationNbComments($i)
+              (string) $i,
+              (int) Comment::getVariationNbComments($i)
         ];
     }
 
@@ -60,6 +59,8 @@ class WelcomeController extends Controller
     $nbCategories = Categorie::getNbCategoriesFilled();
     $nbMedias = Media::getNbMedias();
     $nbComment = Comment::getNbCommentActif(1);
+
+    $oneArt = Article::all()->random();
 
     // dump($nbMedias);
     // exit();
@@ -84,6 +85,7 @@ class WelcomeController extends Controller
        'nbCategories' => $nbCategories,
        'nbMedias' => $nbMedias,
        'nbComment' => $nbComment,
+       'oneArt' => $oneArt,
       ]
    );
   }
