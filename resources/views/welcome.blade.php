@@ -392,7 +392,7 @@ $(function () {
       <textarea class="form-control"  ng-model="description" required placeholder="Description.."></textarea>
       <input class="form-control" type="url" ng-model="url" required placeholder="Url: youtube, dailymotion">
       <input class="form-control" type="text" ng-model="annee" required placeholder="Année de sortie">
-      <input class="form-control" type="text" ng-model="created_at" required placeholder="Date de sortie">
+      <input class="form-control" type="text" ng-model="created_at" required placeholder="Année de sortie">
       <button ng-click="add()" type="submit" class="btn btn-primary" name="button"><i class="fa fa-check"></i>Ajouter la vidéo</button>
     </form>
 
