@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Comment;
 use Validator;
+use Auth;
+
 class CommentController extends Controller
 {
   /**
@@ -25,7 +27,7 @@ class CommentController extends Controller
       $comm->content = $request->content;
       $comm->note = $request->note;
       $comm->etat = 1;
-      $comm->user_id = 1;
+      $comm->user_id = Auth::user()->id; //recupérer l'id de l'utiliteur connecté
       $comm->save(); // created_at at now()
     }
   }

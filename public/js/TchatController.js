@@ -70,7 +70,7 @@ $('.slimscroll').scroll(function () {
 });
 
 $interval(function(){
-  $http.get('/tchat/' + $scope.skipe + "/" + $scope.take)
+  $http.get('/admin/tchat/' + $scope.skipe + "/" + $scope.take)
     .then(function(response) {
         if(areDifferentByIds($scope.messages,response.data)){
           $scope.messages = response.data;  //
@@ -88,7 +88,7 @@ $interval(function(){
 
       if($scope.content != undefined && $scope.content.length > 0){
         // $http post me permet de faire une REQUETE en POST
-        $http.post('/tchat-add', // url (uri)
+        $http.post('/admin/tchat-add', // url (uri)
         {'content': $scope.content.trim() })
         // {'content': $scope.content.trim() }
         // content: c'est le name de mon input-group
