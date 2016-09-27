@@ -10,7 +10,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\User;
 use Session;
-
+use Mail;
 class ArticleController extends Controller
 {
 
@@ -19,7 +19,17 @@ class ArticleController extends Controller
   * Para converter
   */
   public function delete($id) {
+
+    Mail::send('email/delete_article', [],
+    function ($m){
+       $m->from('julien@meetserious.com', 'Boyer Julien');
+       $m->to("toto@free.fr", "Toto")
+       ->subject('Un article a été supprimé');
+   });
+
+
     Article::deleteArticle($id, 'article');  // article:  deleteArticle
+
 
     return redirect()->route('article.list') // redirige vers la page media
    ->with('success', 'L\'article a bien été supprimé.');

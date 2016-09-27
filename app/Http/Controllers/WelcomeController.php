@@ -9,6 +9,7 @@ use App\Article;
 use App\Categorie;
 use App\Media;
 use App\Comment;
+use Mail;
 
 class WelcomeController extends Controller
 {
@@ -54,6 +55,8 @@ class WelcomeController extends Controller
   * Homepage
   */
   public function welcome(){
+    // use Mail
+    // 'email/welcome', [] => Nom de la vue + Transporteur de données
 
     $nbArticles = Article::getNbArticlesVisibles(1);
     $nbCategories = Categorie::getNbCategoriesFilled();
