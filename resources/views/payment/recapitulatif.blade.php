@@ -2,21 +2,25 @@
 
 @section('js')
   @parent
+  {{-- Stripe recommande Jquery pour l'utilisation  --}}
+  {{-- API(ensemble de fonctions) en JS de Stripe --}}
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
+
+
   <script type="text/javascript">
-    $(function() {
+    // demarre de Jquery
+    $(function(){
+
+      // connection à notre Compte par la clef primaire (identifiant)
       Stripe.setPublishableKey('pk_test_jWuVIvzJdP8hwP1jnLEgYDLT');
 
-
-      var $form = $('#payment-form');
-
+      $form =  $('#payment-form');
+      // submit : quand je soumet mon formulaire
       $form.submit(function(event) {
 
-        event.preventDefault()
-
         // Disable the submit button to prevent repeated clicks:
-        $form.find('#send').prop('disabled', true);
+        $(this).find('#send').attr('disabled');
 
         // Request a token from Stripe:
         Stripe.card.createToken({
@@ -47,6 +51,13 @@
 
 
 @section('content')
+
+  @if(Session::has('success'))
+      <div class="alert alert-success">
+          {{ Session::get('success') }}
+      </div>
+  @endif
+  
   <section class="invoice">
 
       <!-- title row -->
@@ -166,6 +177,8 @@
                 required type="text" size="4" data-stripe="cvc">
               </label>
             </div>
+
+            {{-- <input type="hidden" name="amount" value="{{ $somme + $somme * 0.2 }}"> --}}
 
             <button type="submit" id="send" class="btn btn-info">
               <span class="fa fa-credit-card"></span> Payer cette somme
