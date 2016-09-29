@@ -105,7 +105,6 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   @forelse(session('likes', []) as $key => $value)
-
                     <li>
                         <i class="fa fa-users text-aqua"></i>
                         {{ $value }}

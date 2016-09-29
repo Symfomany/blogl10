@@ -16,6 +16,9 @@ Route::group([
     // middleware: filtre d'authentification : uniquement si il est connecter
 
     Route::get('/', 'WelcomeController@welcome')->name('homepage');
+
+    Route::get('/translation/{locale}', 'WelcomeController@langue')->name('langue');
+
     Route::get('/categories-stats',
     'WelcomeController@statsCategories')
     ->name('statsCategories');
@@ -25,6 +28,9 @@ Route::group([
 
     Route::get('/comments-stats','WelcomeController@commentsArticles')
     ->name('commentsArticles');
+
+    Route::any('/recapitulatif','PaymentController@recapitulatif')
+    ->name('recapitulatif');
 
 
 

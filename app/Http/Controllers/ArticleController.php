@@ -11,6 +11,7 @@ use Dompdf\Options;
 use App\User;
 use Session;
 use Mail;
+
 class ArticleController extends Controller
 {
 
@@ -20,19 +21,10 @@ class ArticleController extends Controller
   */
   public function delete($id) {
 
-    Mail::send('email/delete_article', [],
-    function ($m){
-       $m->from('julien@meetserious.com', 'Boyer Julien');
-       $m->to("toto@free.fr", "Toto")
-       ->subject('Un article a été supprimé');
-   });
-
-
     Article::deleteArticle($id, 'article');  // article:  deleteArticle
 
-
     return redirect()->route('article.list') // redirige vers la page media
-   ->with('success', 'L\'article a bien été supprimé.');
+   ->with('success', trans('messages.deleteArticle'));
  }
 
  /**
@@ -83,14 +75,15 @@ public function voir(Article $id){
 
 
 
-    public function lister(){
-      $articles = Article::all(); // récupérer tous les utilisateurs
-      // transporteur: c'est un conteneur de données (tableaux)
-      // elle envoies les données du controlleur à la vue
-      return view('article/list', [
-        'articles' => $articles
-      ]);
-    }
+public function lister(){
+
+  $articles = Article::all(); // récupérer tous les utilisateurs
+  // transporteur: c'est un conteneur de données (tableaux)
+  // elle envoies les données du controlleur à la vue
+  return view('article/list', [
+    'articles' => $articles
+  ]);
+}
 
 
     /**

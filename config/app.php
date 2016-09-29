@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'fr',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,8 +159,9 @@ return [
         /**
         * Charge le provider
         */
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
 
+  
     ],
 
     /*

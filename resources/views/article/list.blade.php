@@ -18,16 +18,26 @@
     </div>
 @endif
 
+<div class="pull-right">
+  <ul class="nav">
+    <li><a href="{{ route('langue', ['locale' => 'fr']) }}"><i class="fa fa-flag"></i> Français</a></li>
+    <li><a href="{{ route('langue', ['locale' => 'en']) }}"><i class="fa fa-flag"></i> Anglais</a></li>
+    <li><a href="{{ route('langue', ['locale' => 'es']) }}"><i class="fa fa-flag"></i> Espagnol</a></li>
+    <li><a href="{{ route('langue', ['locale' => 'it']) }}"><i class="fa fa-flag"></i> Italien</a></li>
+  </ul>
+</div>
+
+
 <table class="table">
   <thead>
     <th>
       Id
     </th>
     <th>
-      Date de publication
+      @lang('messages.published_at')
     </th>
     <th>
-    Titre
+      @lang('messages.titre')
     </th>
 
     <th>

@@ -8,6 +8,20 @@ class User extends Authenticatable
 {
   protected $table = "user";
 
+  /**
+  * SELECT  `nom` ,  `email`
+  * FROM  `user`
+  * LEFT JOIN COMMENT ON user.id = comment.user_id
+  * WHERE comment.user_id IS NULL
+  */
+  public static function getBadUser(){
+    return DB::table('user')->select('nom', 'email')
+     ->leftJoin('comment', 'comment.user_id', '=', 'user.id')
+     ->whereNull('comment.user_id')
+     ->get();
+  }
+
+
   public static function infoUser(array $table, $id) {
     return DB::table('user')->select($table)
                          ->where('id', $id)

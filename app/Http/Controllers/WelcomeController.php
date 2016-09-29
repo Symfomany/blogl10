@@ -10,9 +10,22 @@ use App\Categorie;
 use App\Media;
 use App\Comment;
 use Mail;
-
+use App;
+use Session;
+use Lang;
 class WelcomeController extends Controller
 {
+
+
+  public function langue($locale){
+
+    App::setLocale($locale);
+    return redirect()
+    ->back()
+    ->with('success',trans('messages.successLangue') 
+    );
+  }
+
 
   /**
   * Retoruner du JSON (un tableaux d'objets en JS)
@@ -55,8 +68,6 @@ class WelcomeController extends Controller
   * Homepage
   */
   public function welcome(){
-    // use Mail
-    // 'email/welcome', [] => Nom de la vue + Transporteur de données
 
     $nbArticles = Article::getNbArticlesVisibles(1);
     $nbCategories = Categorie::getNbCategoriesFilled();
